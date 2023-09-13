@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Good;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\DBAL\Exception;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -25,5 +26,10 @@ class GoodRepository extends ServiceEntityRepository
     {
         $this->_em->persist($good);
         $this->_em->flush();
+    }
+
+    public function delete(int $id): void {
+        $connection = $this->_em->getConnection();
+        $connection->delete('goods', ['id' => $id]);
     }
 }

@@ -25,6 +25,8 @@ class Good
     #[ORM\Column(length: 255)]
     private ?string $description = null;
 
+    private int $deletedAt;
+
     public function getId(): ?int
     {
         return $this->id;

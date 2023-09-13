@@ -9,6 +9,7 @@ use App\DTO\GoodForUpdate;
 use App\Entity\Good;
 use App\Exception\NotFoundException;
 use App\Repository\GoodRepository;
+use Doctrine\DBAL\Exception;
 
 class GoodServiceImpl implements GoodService
 {
@@ -40,5 +41,26 @@ class GoodServiceImpl implements GoodService
         $good->setDescription($dto->description);
 
         $this->goodRepository->save($good);
+    }
+
+    /**
+     * @throws NotFoundException
+     */
+    public function get(int $id): Good
+    {
+        $good = $this->goodRepository->find($id);
+        if (!$good) throw new NotFoundException('good is not found');
+
+        return $good;
+    }
+    
+    public function delete(int $id): void
+    {
+        $good = $this->goodRepository->find($id);
+        if (!$good) return;
+
+        // todo delete file
+
+        $this->goodRepository->delete($id);
     }
 }
