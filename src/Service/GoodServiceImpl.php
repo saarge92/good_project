@@ -10,10 +10,15 @@ use App\Entity\Good;
 use App\Exception\NotFoundException;
 use App\Repository\GoodRepository;
 use Doctrine\DBAL\Exception;
+use Doctrine\ORM\NonUniqueResultException;
 
 class GoodServiceImpl implements GoodService
 {
-    public function __construct(private readonly GoodRepository $goodRepository){}
+    public function __construct(private readonly GoodRepository $goodRepository,
+                                private readonly FileService    $fileService)
+    {
+    }
+
     public function create(GoodForCreate $dto): void
     {
         $good = new Good();
@@ -21,8 +26,8 @@ class GoodServiceImpl implements GoodService
         $good->setPrice($dto->price);
         $good->setDescription($dto->description);
 
-        // todo save uploaded file using service
-        // $good->setPhoto()
+        $savedPath = $this->fileService->upload($dto->photo);
+        $good->setPhoto($savedPath);
 
         $this->goodRepository->save($good);
     }
@@ -45,15 +50,16 @@ class GoodServiceImpl implements GoodService
 
     /**
      * @throws NotFoundException
+     * @throws NonUniqueResultException
      */
     public function get(int $id): Good
     {
-        $good = $this->goodRepository->find($id);
+        $good = $this->goodRepository->one($id);
         if (!$good) throw new NotFoundException('good is not found');
 
         return $good;
     }
-    
+
     public function delete(int $id): void
     {
         $good = $this->goodRepository->find($id);

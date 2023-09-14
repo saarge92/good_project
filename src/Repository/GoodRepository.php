@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Good;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\DBAL\Exception;
+use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -28,8 +29,25 @@ class GoodRepository extends ServiceEntityRepository
         $this->_em->flush();
     }
 
-    public function delete(int $id): void {
+    /**
+     * @throws Exception
+     */
+    public function delete(int $id): void
+    {
         $connection = $this->_em->getConnection();
         $connection->delete('goods', ['id' => $id]);
+    }
+
+    /**
+     * @throws NonUniqueResultException
+     */
+    public function one(int $id): ?Good
+    {
+        return$this->_em->createQueryBuilder()
+            ->from(Good::class, 'g')
+            ->select('g')->where('g.id = :id')
+            ->andWhere('g.deletedAt IS NULL')
+            ->setParameter("id", $id)
+            ->getQuery()->getOneOrNullResult();
     }
 }
