@@ -17,4 +17,9 @@ interface GoodService
     public function get(int $id): Good;
 
     public function delete(int $id): void;
+
+    /**
+     * @return array []Good
+     */
+    public function list(): array;
 }

@@ -43,11 +43,22 @@ class GoodRepository extends ServiceEntityRepository
      */
     public function one(int $id): ?Good
     {
-        return$this->_em->createQueryBuilder()
+        return $this->_em->createQueryBuilder()
             ->from(Good::class, 'g')
             ->select('g')->where('g.id = :id')
             ->andWhere('g.deletedAt IS NULL')
             ->setParameter("id", $id)
             ->getQuery()->getOneOrNullResult();
+    }
+
+    /**
+     * @return array []Good
+     */
+    public function list(): array
+    {
+        return $this->_em->createQueryBuilder()
+            ->from(Good::class, 'g')
+            ->select('g')->where('g.deletedAt IS NULL')
+            ->getQuery()->getResult();
     }
 }

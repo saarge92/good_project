@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Good's list{% endblock %}
+
+{% block body %}
+    <a href="" class="btn btn-danger"><i class="fa-solid fa-plus"></i>Add new good</a>
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Price</th>
+            <th scope="col">Description</th>
+        </tr>
+        </thead>
+        {% for good in goods %}
+            <tr>
+                <td>
+                    {{ good.name }}
+                </td>
+                <td>
+                    {{ good.price }}
+                </td>
+                <td>
+                    {{ good.description }}
+                </td>
+                <td>
+                    <a href="{{ path('good_one', {'id' :good.id}) }}" class="btn btn-primary">
+                        <i class="fa-solid fa-magnifying-glass"></i>Review</a>
+                </td>
+                <td>
+                    <a href="{{ path('good_delete', {'id': good.id}) }}" class="btn btn-dark"><i class="fa-solid fa-delete-left"></i>Delete</a>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+
+{% endblock %}

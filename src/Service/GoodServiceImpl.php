@@ -75,4 +75,10 @@ class GoodServiceImpl implements GoodService
 
         $this->goodRepository->delete($id);
     }
+
+    /** @return array []Good */
+    public function list(): array
+    {
+        return $this->goodRepository->list();
+    }
 }

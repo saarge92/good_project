@@ -13,6 +13,7 @@
             <p>{{ good.price }}</p>
             <p class="card-text">{{ good.description }}</p>
             <a href="{{ path('good_update', {'id': good.id}) }}" class="btn btn-danger">Edit</a>
+            <a href="{{ path('goods_list', {'id': good.id}) }}" class="btn btn-secondary">Back to List</a>
         </div>
     </div>
 {% endblock %}

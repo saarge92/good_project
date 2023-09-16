@@ -64,4 +64,18 @@ class GoodController extends AbstractController
 
         return $this->render('good/update.html.twig', ['form' => $form, 'good' => $good]);
     }
+
+    #[Route(path: "/list", name: 'goods_list', methods: "GET")]
+    public function list(): Response {
+        $goods = $this->goodService->list();
+        return $this->render('good/list.html.twig', ['goods' => $goods]);
+    }
+
+    #[Route(path: '/delete/{id}', name:"good_delete", methods: "DELETE")]
+    public function delete(int $id):Response
+    {
+        $this->goodService->delete($id);
+
+        return $this->redirectToRoute('goods_list');
+    }
 }
