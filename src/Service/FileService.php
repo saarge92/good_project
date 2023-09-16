@@ -9,4 +9,6 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 interface FileService
 {
     public function upload(UploadedFile $file): string;
+
+    public function delete(string $path): void;
 }

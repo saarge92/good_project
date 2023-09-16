@@ -1,9 +1,9 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Create new good{% endblock %}
+{% block title %}Good info{% endblock %}
 
 {% block stylesheets %}
-{%  endblock %}
+{% endblock %}
 
 {% block body %}
     <div class="card" style="width: 18rem;">
@@ -12,6 +12,7 @@
             <h5 class="card-title">{{ good.name }}</h5>
             <p>{{ good.price }}</p>
             <p class="card-text">{{ good.description }}</p>
+            <a href="{{ path('good_update', {'id': good.id}) }}" class="btn btn-danger">Edit</a>
         </div>
     </div>
 {% endblock %}

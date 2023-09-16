@@ -34,13 +34,19 @@ class GoodServiceImpl implements GoodService
 
     /**
      * @throws NotFoundException
+     * @throws NonUniqueResultException
      */
     public function update(GoodForUpdate $dto): void
     {
-        $good = $this->goodRepository->find($dto->id);
+        $good = $this->goodRepository->one($dto->id);
         if (!$good) throw new NotFoundException('good is not found');
 
-        // todo check if uploaded file is empty -> then save uploaded file & delete previous
+        if ($dto->photo) {
+            $savedPath = $this->fileService->upload($dto->photo);
+            $this->fileService->delete($good->getPhoto());
+            $good->setPhoto($savedPath);
+        }
+
         $good->setName($dto->name);
         $good->setPrice($dto->price);
         $good->setDescription($dto->description);

@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Update good{% endblock %}
+
+{% block stylesheets %}
+    <style>
+        .form-group {
+            margin-top: 5px;
+        }
+    </style>
+{%  endblock %}
+
+{% block body %}
+    {{ form_errors(form) }}
+    {{ form_start(form, {'action': path('good_update', {'id': good.id})}) }}
+
+    <div class="form-group">
+        {{ form_label(form.name) }}
+        {{ form_widget(form.name, {'attr': {'class': 'form-control'}, 'value': good.name}) }}
+    </div>
+
+    <div class="form-group">
+        {{ form_label(form.price) }}
+        {{ form_widget(form.price, {'attr': {'class': 'form-control', 'value': good.price}}) }}
+    </div>
+
+    <div class="form-group">
+        {{ form_label(form.description) }}
+        {{ form_widget(form.description, {'attr': {'class': 'form-control', 'value': good.description}}) }}
+    </div>
+
+    <div class="form-group">
+        {{ form_label(form.photo) }}
+        {{ form_widget(form.photo, {'attr': {'class': 'form-control'}}) }}
+    </div>
+
+
+    <div class="form-group">
+        {{ form_widget(form.save, {'attr' : {'class': 'btn btn-danger'}}) }}
+    </div>
+
+    {{ form_end(form) }}
+{% endblock %}

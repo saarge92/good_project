@@ -4,12 +4,17 @@ declare(strict_types=1);
 
 namespace App\Service;
 
+use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\String\Slugger\SluggerInterface;
 
 class FileServiceImpl implements FileService
 {
-    public function __construct(private readonly SluggerInterface $slugger, private readonly string $uploadFileDirectory)
+    public function __construct(
+        private readonly SluggerInterface $slugger,
+        private readonly string $uploadFileDirectory,
+        private readonly FileSystem $fileSystem,
+    )
     {
     }
 
@@ -22,5 +27,10 @@ class FileServiceImpl implements FileService
         $file->move($this->uploadFileDirectory, $newFilename);
 
         return $this->uploadFileDirectory . $newFilename;
+    }
+
+    public function delete(string $path): void
+    {
+        $this->fileSystem->remove($path);
     }
 }
