@@ -34,8 +34,12 @@ class GoodRepository extends ServiceEntityRepository
      */
     public function delete(int $id): void
     {
-        $connection = $this->_em->getConnection();
-        $connection->delete('good', ['id' => $id]);
+        $queryBuilder = $this->createQueryBuilder('q');
+        $queryBuilder->update(Good::class, 'g')
+            ->where('g.id = :id')
+            ->setParameter('id', $id)
+            ->set('g.deletedAt', time())
+            ->getQuery()->execute();
     }
 
     /**

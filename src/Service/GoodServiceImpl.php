@@ -74,8 +74,6 @@ class GoodServiceImpl implements GoodService
         $good = $this->goodRepository->find($id);
         if (!$good) return;
 
-        $this->fileService->delete($good->getPhoto());
-
         $this->goodRepository->delete($id);
     }
 
