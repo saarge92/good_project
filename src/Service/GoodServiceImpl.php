@@ -58,7 +58,7 @@ class GoodServiceImpl implements GoodService
      * @throws NotFoundException
      * @throws NonUniqueResultException
      */
-    public function get(int $id): Good
+    public function one(int $id): Good
     {
         $good = $this->goodRepository->one($id);
         if (!$good) throw new NotFoundException('good is not found');

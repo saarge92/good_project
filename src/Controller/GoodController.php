@@ -20,9 +20,9 @@ class GoodController extends AbstractController
     }
 
     #[Route(path: "/one/{id}", name: "good_one", methods: "GET")]
-    public function get(int $id): Response
+    public function one(int $id): Response
     {
-        $good = $this->goodService->get($id);
+        $good = $this->goodService->one($id);
         return $this->render('good/one.html.twig', ['good' => $good]);
     }
 
@@ -45,7 +45,7 @@ class GoodController extends AbstractController
     #[Route(path: "/update/{id}", name: "good_update")]
     public function update(Request $request, int $id): Response
     {
-        $good = $this->goodService->get($id);
+        $good = $this->goodService->one($id);
         $form = $this->createForm(UpdateGoodType::class);
         $form->handleRequest($request);
 

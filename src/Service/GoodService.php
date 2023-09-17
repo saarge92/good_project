@@ -14,7 +14,7 @@ interface GoodService
 
     public function update(GoodForUpdate $dto): void;
 
-    public function get(int $id): Good;
+    public function one(int $id): Good;
 
     public function delete(int $id): void;
 
