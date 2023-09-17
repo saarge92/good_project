@@ -7,6 +7,7 @@ use App\Form\UpdateGoodType;
 use App\Form\NewGoodType;
 use App\Service\GoodService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -35,7 +36,7 @@ class GoodController extends AbstractController
             $dto = $form->getData();
             $this->goodService->create($dto);
 
-            return $this->render('good/create.html.twig', ['form' => $form]);
+            return $this->redirectToRoute('goods_list');
         }
 
         return $this->render('good/create.html.twig', ['form' => $form]);
@@ -66,16 +67,17 @@ class GoodController extends AbstractController
     }
 
     #[Route(path: "/list", name: 'goods_list', methods: "GET")]
-    public function list(): Response {
+    public function list(): Response
+    {
         $goods = $this->goodService->list();
         return $this->render('good/list.html.twig', ['goods' => $goods]);
     }
 
-    #[Route(path: '/delete/{id}', name:"good_delete", methods: "DELETE")]
-    public function delete(int $id):Response
+    #[Route(path: '/delete/{id}', name: "good_delete", methods: "DELETE")]
+    public function delete(int $id): Response
     {
         $this->goodService->delete($id);
 
-        return $this->redirectToRoute('goods_list');
+        return $this->json(['message' => 'Ok'], Response::HTTP_OK);
     }
 }

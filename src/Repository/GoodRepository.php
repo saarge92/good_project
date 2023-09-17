@@ -35,7 +35,7 @@ class GoodRepository extends ServiceEntityRepository
     public function delete(int $id): void
     {
         $connection = $this->_em->getConnection();
-        $connection->delete('goods', ['id' => $id]);
+        $connection->delete('good', ['id' => $id]);
     }
 
     /**

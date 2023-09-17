@@ -66,12 +66,15 @@ class GoodServiceImpl implements GoodService
         return $good;
     }
 
+    /**
+     * @throws Exception
+     */
     public function delete(int $id): void
     {
         $good = $this->goodRepository->find($id);
         if (!$good) return;
 
-        // todo delete file
+        $this->fileService->delete($good->getPhoto());
 
         $this->goodRepository->delete($id);
     }
