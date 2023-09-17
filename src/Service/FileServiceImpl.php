@@ -24,7 +24,7 @@ class FileServiceImpl implements FileService
     {
         $originalFilename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
         $safeFilename = $this->slugger->slug($originalFilename);
-        $newFilename = $safeFilename . '-' . uniqid() . '.' . $file->guessExtension();
+        $newFilename = $safeFilename . '-' . uniqid() . '.' . $file->getClientOriginalExtension();
 
         $savePath = $this->publicPath . self::UPLOADS_PATH;
         $file->move($savePath, $newFilename);

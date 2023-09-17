@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Tests;
 
 use App\DTO\GoodForCreate;
+use App\DTO\GoodForUpdate;
 use App\Repository\GoodRepository;
 use App\Service\GoodServiceImpl;
 use Doctrine\ORM\NonUniqueResultException;
@@ -19,7 +20,7 @@ class GoodServiceTest extends WebTestCase
     {
         parent::setUp();
         self::bootKernel([
-           'environment' => 'test'
+            'environment' => 'test'
         ]);
     }
 
@@ -38,6 +39,24 @@ class GoodServiceTest extends WebTestCase
         $this->assertGoodCreated($id, $container->get(GoodRepository::class));
     }
 
+    /**
+     * @throws \Exception
+     */
+    public function testUpdate(): void
+    {
+        $container = self::getContainer();
+        /** @var GoodServiceImpl $service */
+        $service = $container->get(GoodServiceImpl::class);
+
+        $createDto = $this->initGoodForCreateDTO();
+        $id = $service->create($createDto);
+
+        $updateDto = $this->initGoodForUpdateDTO($id);
+        $service->update($updateDto);
+
+        $this->assertGoodUpdated($updateDto, $container->get(GoodRepository::class));
+    }
+
     private function initGoodForCreateDTO(): GoodForCreate
     {
         $imagePath = Factory::create()->image();
@@ -52,13 +71,41 @@ class GoodServiceTest extends WebTestCase
         return $dto;
     }
 
+    private function initGoodForUpdateDTO($id): GoodForUpdate
+    {
+        $imagePath = Factory::create()->image();
+        $image = new UploadedFile($imagePath, 'image.jpg', 'image/jpeg', null, true);
+
+        return new GoodForUpdate(
+            $id,
+            "new_name",
+            1.25,
+            $image,
+            "new_description",
+        );
+    }
+
     /**
      * @throws NonUniqueResultException
      */
-    private function assertGoodCreated(int $id, GoodRepository $repository): void {
+    private function assertGoodCreated(int $id, GoodRepository $repository): void
+    {
         $good = $repository->one($id);
 
         $this->assertNotNull($good);
         $this->assertEquals($id, $good->getId());
+    }
+
+    /**
+     * @throws NonUniqueResultException
+     */
+    private function assertGoodUpdated(GoodForUpdate $dto, GoodRepository $repository) : void
+    {
+        $good = $repository->one($dto->id);
+
+        $this->assertNotNull($good);
+        $this->assertEquals($dto->name, $good->getName());
+        $this->assertEquals($dto->price, $good->getPrice());
+        $this->assertEquals($dto->description, $good->getDescription());
     }
 }
