@@ -10,9 +10,11 @@ use Symfony\Component\String\Slugger\SluggerInterface;
 
 class FileServiceImpl implements FileService
 {
+    private const UPLOADS_PATH = "uploads/";
+
     public function __construct(
         private readonly SluggerInterface $slugger,
-        private readonly string $uploadFileDirectory,
+        private readonly string $publicPath,
         private readonly FileSystem $fileSystem,
     )
     {
@@ -24,9 +26,10 @@ class FileServiceImpl implements FileService
         $safeFilename = $this->slugger->slug($originalFilename);
         $newFilename = $safeFilename . '-' . uniqid() . '.' . $file->guessExtension();
 
-        $file->move($this->uploadFileDirectory, $newFilename);
+        $savePath = $this->publicPath . self::UPLOADS_PATH;
+        $file->move($savePath, $newFilename);
 
-        return $this->uploadFileDirectory . $newFilename;
+        return self::UPLOADS_PATH . $newFilename;
     }
 
     public function delete(string $path): void

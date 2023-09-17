@@ -10,7 +10,7 @@ use App\Entity\Good;
 
 interface GoodService
 {
-    public function create(GoodForCreate $dto): void;
+    public function create(GoodForCreate $dto): int;
 
     public function update(GoodForUpdate $dto): void;
 

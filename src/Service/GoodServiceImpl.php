@@ -19,7 +19,7 @@ class GoodServiceImpl implements GoodService
     {
     }
 
-    public function create(GoodForCreate $dto): void
+    public function create(GoodForCreate $dto): int
     {
         $good = new Good();
         $good->setName($dto->name);
@@ -30,6 +30,8 @@ class GoodServiceImpl implements GoodService
         $good->setPhoto($savedPath);
 
         $this->goodRepository->save($good);
+
+        return $good->getId();
     }
 
     /**
