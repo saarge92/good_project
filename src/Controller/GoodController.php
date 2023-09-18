@@ -7,7 +7,6 @@ use App\Form\UpdateGoodType;
 use App\Form\NewGoodType;
 use App\Service\GoodService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;

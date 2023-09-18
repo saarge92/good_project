@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Create new good from fakestoreapi.com{% endblock %}
+
+{% block stylesheets %}
+    <style>
+        .form-group {
+            margin-top: 5px;
+        }
+        .error-list{
+            color:red;
+        }
+    </style>
+{%  endblock %}
+
+{% block body %}
+    {{ form_start(form) }}
+
+    <div class="form-group">
+        {{ form_label(form.url, 'URL from fakestoreapi.com. Example https://fakestoreapi.com/products/1') }}
+        {{ form_widget(form.url, {'attr': {'class': 'form-control'}}) }}
+        {{ form_errors(form.url) }}
+    </div>
+
+    <div class="form-group">
+        {{ form_widget(form.save, {'attr' : {'class': 'btn btn-danger'}}) }}
+    </div>
+
+    {{ form_end(form) }}
+{% endblock %}

@@ -18,8 +18,6 @@ interface GoodService
 
     public function delete(int $id): void;
 
-    /**
-     * @return array []Good
-     */
+    /** @return array []Good */
     public function list(): array;
 }
