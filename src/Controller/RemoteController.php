@@ -13,7 +13,9 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class RemoteController extends AbstractController
 {
-    public function __construct(private readonly RemoteLoaderService $loaderService){}
+    public function __construct(private readonly RemoteLoaderService $loaderService)
+    {
+    }
 
     #[Route(path: 'remote/parse', name: 'remote_good_parse')]
     public function parseFromURL(Request $request): Response

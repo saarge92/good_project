@@ -16,8 +16,7 @@ class FileServiceInterfaceImpl implements FileServiceInterface
         private readonly SluggerInterface $slugger,
         private readonly string $publicPath,
         private readonly FileSystem $fileSystem,
-    )
-    {
+    ) {
     }
 
     public function upload(UploadedFile $file): string

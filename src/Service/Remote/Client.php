@@ -17,8 +17,8 @@ class Client implements ClientInterface
 {
     public function __construct(
         private readonly HttpClientInterface $httpClient,
-        private readonly SerializerInterface $serializer)
-    {
+        private readonly SerializerInterface $serializer
+    ) {
     }
 
     /**

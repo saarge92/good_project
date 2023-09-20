@@ -8,11 +8,12 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class GoodForUpdate
 {
-    public function __construct(public int           $id,
-                                public string        $name,
-                                public float         $price,
-                                public ?UploadedFile $photo,
-                                public ?string       $description)
-    {
+    public function __construct(
+        public int $id,
+        public string $name,
+        public float $price,
+        public ?UploadedFile $photo,
+        public ?string $description
+    ) {
     }
 }

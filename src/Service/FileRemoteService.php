@@ -6,7 +6,10 @@ namespace App\Service;
 
 class FileRemoteService implements FileRemoteServiceInterface
 {
-    public function __construct(private readonly string $publicPath){}
+    public function __construct(private readonly string $publicPath)
+    {
+    }
+
     public function uploadFromURL(string $url): string
     {
         $pathInfo = pathinfo($url);

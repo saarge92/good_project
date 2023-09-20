@@ -20,7 +20,7 @@ class RemoteUrlConstraintValidator extends ConstraintValidator
 
         $url = (string)$value;
 
-        if (filter_var($url, FILTER_VALIDATE_URL) === FALSE) {
+        if (filter_var($url, FILTER_VALIDATE_URL) === false) {
             $this->context->addViolation('string {{ string }} is not url', ['string' => $url]);
         }
 
@@ -30,7 +30,7 @@ class RemoteUrlConstraintValidator extends ConstraintValidator
             $this->context->addViolation("url has not fakestoreapi domain");
         }
 
-        if (preg_match("/^\/products\/\d+/", $parsedUrlData['path']) === FALSE) {
+        if (preg_match("/^\/products\/\d+/", $parsedUrlData['path']) === false) {
             $this->context->addViolation('route is not valid');
         }
     }

@@ -14,9 +14,10 @@ use Doctrine\ORM\NonUniqueResultException;
 
 class GoodService implements GoodServiceInterface
 {
-    public function __construct(private readonly GoodRepository       $goodRepository,
-                                private readonly FileServiceInterface $fileService)
-    {
+    public function __construct(
+        private readonly GoodRepository $goodRepository,
+        private readonly FileServiceInterface $fileService
+    ) {
     }
 
     public function create(GoodForCreate $dto): int
@@ -41,7 +42,9 @@ class GoodService implements GoodServiceInterface
     public function update(GoodForUpdate $dto): void
     {
         $good = $this->goodRepository->one($dto->id);
-        if (!$good) throw new NotFoundException('good is not found');
+        if (!$good) {
+            throw new NotFoundException('good is not found');
+        }
 
         if ($dto->photo) {
             $savedPath = $this->fileService->upload($dto->photo);
@@ -63,7 +66,9 @@ class GoodService implements GoodServiceInterface
     public function one(int $id): Good
     {
         $good = $this->goodRepository->one($id);
-        if (!$good) throw new NotFoundException('good is not found');
+        if (!$good) {
+            throw new NotFoundException('good is not found');
+        }
 
         return $good;
     }
@@ -74,7 +79,9 @@ class GoodService implements GoodServiceInterface
     public function delete(int $id): void
     {
         $good = $this->goodRepository->find($id);
-        if (!$good) return;
+        if (!$good) {
+            return;
+        }
 
         $this->goodRepository->delete($id);
     }

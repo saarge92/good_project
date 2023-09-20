@@ -1,8 +1,9 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Form;
 
-use App\DTO\GoodForUpdate;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
@@ -42,7 +43,9 @@ class UpdateGoodType extends AbstractType
                     new Image(['maxSize' => '10m'])
                 ]
             ])
-            ->add('description', TextType::class,
+            ->add(
+                'description',
+                TextType::class,
                 [
                     'required' => false,
                     'constraints' => [

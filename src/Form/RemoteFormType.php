@@ -10,7 +10,6 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Validator\Constraints\NotBlank;
-use Symfony\Component\Validator\Constraints\Url;
 
 class RemoteFormType extends AbstractType
 {
@@ -24,6 +23,7 @@ class RemoteFormType extends AbstractType
                     new RemoteUrlConstraint()
                 ]
             ])
-            ->add('save', SubmitType::class);;
+            ->add('save', SubmitType::class);
+        ;
     }
 }

@@ -11,20 +11,18 @@ use App\Service\GoodLoaderRemoteServiceInterface;
 use App\Service\Remote\Client;
 use App\Service\Remote\ClientInterface;
 use App\Service\Remote\Good as GoodRemote;
+use Exception;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class GoodRemoteLoaderServiceTest extends WebTestCase
 {
     protected function setUp(): void
     {
-        parent::setUp();
-        self::bootKernel([
-            'environment' => 'test'
-        ]);
+        self::bootKernel();
     }
 
     /**
-     * @throws \Exception
+     * @throws Exception
      */
     public function testUpload(): void
     {

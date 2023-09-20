@@ -11,10 +11,11 @@ use App\Service\Remote\ClientInterface;
 
 class GoodRemoteLoaderService implements GoodLoaderRemoteServiceInterface
 {
-    public function __construct(private readonly ClientInterface            $client,
-                                private readonly FileRemoteServiceInterface $fileRemoteService,
-                                private readonly GoodRepository             $goodRepository)
-    {
+    public function __construct(
+        private readonly ClientInterface $client,
+        private readonly FileRemoteServiceInterface $fileRemoteService,
+        private readonly GoodRepository $goodRepository
+    ) {
     }
 
     public function loadAndSave(string $url): GoodEntity

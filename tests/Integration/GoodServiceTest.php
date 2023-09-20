@@ -15,7 +15,6 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class GoodServiceTest extends WebTestCase
 {
-
     protected function setUp(): void
     {
         parent::setUp();
@@ -99,7 +98,7 @@ class GoodServiceTest extends WebTestCase
     /**
      * @throws NonUniqueResultException
      */
-    private function assertGoodUpdated(GoodForUpdate $dto, GoodRepository $repository) : void
+    private function assertGoodUpdated(GoodForUpdate $dto, GoodRepository $repository): void
     {
         $good = $repository->one($dto->id);
 
