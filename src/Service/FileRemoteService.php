@@ -16,11 +16,11 @@ class FileRemoteService implements FileRemoteServiceInterface
         $fileContent = file_get_contents($url);
 
         $newName = $pathInfo['filename'] . '-' . uniqid() . '.' . $pathInfo['extension'];
-        $savePath = $this->publicPath . FileServiceInterfaceImpl::UPLOADS_PATH;
+        $savePath = $this->publicPath . FileService::UPLOADS_PATH;
 
         $filePath = $savePath . $newName;
         file_put_contents($filePath, $fileContent);
 
-        return FileServiceInterfaceImpl::UPLOADS_PATH . $newName;
+        return FileService::UPLOADS_PATH . $newName;
     }
 }
