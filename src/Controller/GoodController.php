@@ -5,7 +5,7 @@ namespace App\Controller;
 use App\DTO\GoodForUpdate;
 use App\Form\UpdateGoodType;
 use App\Form\NewGoodType;
-use App\Service\GoodService;
+use App\Service\GoodServiceInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -14,7 +14,7 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route(path: "/good")]
 class GoodController extends AbstractController
 {
-    public function __construct(private readonly GoodService $goodService)
+    public function __construct(private readonly GoodServiceInterface $goodService)
     {
     }
 

@@ -7,7 +7,7 @@ namespace App\Tests;
 use App\DTO\GoodForCreate;
 use App\DTO\GoodForUpdate;
 use App\Repository\GoodRepository;
-use App\Service\GoodServiceImpl;
+use App\Service\GoodService;
 use Doctrine\ORM\NonUniqueResultException;
 use Faker\Factory;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
@@ -30,8 +30,8 @@ class GoodServiceTest extends WebTestCase
     public function testCreate(): void
     {
         $container = self::getContainer();
-        /** @var GoodServiceImpl $service */
-        $service = $container->get(GoodServiceImpl::class);
+        /** @var GoodService $service */
+        $service = $container->get(GoodService::class);
 
         $dto = $this->initGoodForCreateDTO();
         $id = $service->create($dto);
@@ -45,8 +45,8 @@ class GoodServiceTest extends WebTestCase
     public function testUpdate(): void
     {
         $container = self::getContainer();
-        /** @var GoodServiceImpl $service */
-        $service = $container->get(GoodServiceImpl::class);
+        /** @var GoodService $service */
+        $service = $container->get(GoodService::class);
 
         $createDto = $this->initGoodForCreateDTO();
         $id = $service->create($createDto);

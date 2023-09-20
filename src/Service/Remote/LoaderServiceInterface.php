@@ -6,7 +6,7 @@ namespace App\Service\Remote;
 
 use  App\Entity\Good as GoodEntity;
 
-interface LoaderService
+interface LoaderServiceInterface
 {
     public function loadAndSave(string $url): GoodEntity;
 }

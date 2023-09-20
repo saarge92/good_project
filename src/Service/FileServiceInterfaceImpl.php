@@ -8,7 +8,7 @@ use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\String\Slugger\SluggerInterface;
 
-class FileServiceImpl implements FileService
+class FileServiceInterfaceImpl implements FileServiceInterface
 {
     public const UPLOADS_PATH = "uploads/";
 

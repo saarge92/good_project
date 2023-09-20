@@ -6,7 +6,7 @@ namespace App\Service;
 
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
-interface FileService
+interface FileServiceInterface
 {
     public function upload(UploadedFile $file): string;
 

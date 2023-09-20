@@ -7,15 +7,15 @@ namespace App\Service\Remote;
 use App\Adapter\GoodAdapter;
 use App\Entity\Good as GoodEntity;
 use App\Repository\GoodRepository;
-use App\Service\FileRemoteService;
-use App\Service\GoodService;
+use App\Service\FileRemoteServiceInterface;
+use App\Service\GoodServiceInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
-class LoadServiceImpl implements LoaderService
+class LoadService implements LoaderServiceInterface
 {
-    public function __construct(private readonly Client $client,
-                                private readonly FileRemoteService $fileRemoteService,
-                                private readonly GoodRepository $goodRepository)
+    public function __construct(private readonly ClientInterface            $client,
+                                private readonly FileRemoteServiceInterface $fileRemoteService,
+                                private readonly GoodRepository             $goodRepository)
     {
     }
 
