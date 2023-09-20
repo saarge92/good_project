@@ -9,14 +9,14 @@ use App\Service\Remote\Good as RemoteGoodDTO;
 
 class GoodAdapter
 {
-    public static function goodRemoteToEntity(RemoteGoodDTO $dnsGood): GoodEntity
+    public static function goodRemoteToEntity(RemoteGoodDTO $remoteGood): GoodEntity
     {
         $good = new GoodEntity();
 
-        $good->setName($dnsGood->title);
-        $good->setPrice($dnsGood->price);
-        $good->setDescription($dnsGood->description);
+        $good->setName($remoteGood->title);
+        $good->setPrice($remoteGood->price);
+        $good->setDescription($remoteGood->description);
 
-        return new GoodEntity();
+        return $good;
     }
 }

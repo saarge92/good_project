@@ -4,17 +4,20 @@ declare(strict_types=1);
 
 namespace App\Service;
 
-use Symfony\Component\Filesystem\Filesystem;
-
 class FileRemoteServiceImpl implements FileRemoteService
 {
-
-    public function __construct(private readonly FileSystem $fileSystem){}
+    public function __construct(private readonly string $publicPath){}
     public function uploadFromURL(string $url): string
     {
-        $parsedUrl = parse_url($url);
-        $pathInfo = pathinfo($parsedUrl);
+        $pathInfo = pathinfo($url);
+        $fileContent = file_get_contents($url);
 
-        return "";
+        $newName = $pathInfo['filename'] . '-' . uniqid() . '.' . $pathInfo['extension'];
+        $savePath = $this->publicPath . FileServiceImpl::UPLOADS_PATH;
+
+        $filePath = $savePath . $newName;
+        file_put_contents($filePath, $fileContent);
+
+        return FileServiceImpl::UPLOADS_PATH . $newName;
     }
 }

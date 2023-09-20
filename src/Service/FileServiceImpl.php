@@ -10,7 +10,7 @@ use Symfony\Component\String\Slugger\SluggerInterface;
 
 class FileServiceImpl implements FileService
 {
-    private const UPLOADS_PATH = "uploads/";
+    public const UPLOADS_PATH = "uploads/";
 
     public function __construct(
         private readonly SluggerInterface $slugger,
