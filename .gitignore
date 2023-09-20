@@ -21,3 +21,5 @@ public/uploads/*
 ###< symfony/phpunit-bridge ###
 
 tests/uploads/**
+
+/.phpcs-cache

@@ -52,6 +52,10 @@
         </properties>
     </rule>
 
+    <rule ref="Generic.CodeAnalysis.UnusedFunctionParameter">
+        <exclude-pattern>src/Form/RemoteFormType.php</exclude-pattern>
+    </rule>
+
     <file>config/</file>
     <file>src/</file>
     <file>tests/</file>

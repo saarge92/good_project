@@ -13,6 +13,7 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 
 class RemoteFormType extends AbstractType
 {
+    // phpcs:ignore
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder

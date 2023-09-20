@@ -18,6 +18,7 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 
 class NewGoodType extends AbstractType
 {
+    // phpcs:ignore
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
